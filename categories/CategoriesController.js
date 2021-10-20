@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 // Rotas
-router.get("/categories", (req, res) => {
+router.get("/category", (req, res) => {
     res.send("Rota das categorias!");
 });
 
