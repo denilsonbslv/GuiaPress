@@ -22,3 +22,8 @@ sqlite3:
 ```
 npm install --save sqlite3
 ```
+
+Slugfy:
+```
+npm install --save slugify
+```

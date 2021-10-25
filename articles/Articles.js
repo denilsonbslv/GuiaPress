@@ -26,7 +26,6 @@ Category.hasMany(Article);   // Relacionamento: Uma categoria para muitos artigo
 Article.belongsTo(Category); // Relacionamento: Um artigo para uma categoria; 1 para 1
 
 // Sincronizando Model com o banco de dados
-Article.sync({force: false});
 
 // Exportando Model
 module.exports = Article;

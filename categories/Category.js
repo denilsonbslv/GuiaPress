@@ -16,7 +16,6 @@ const Category = connection.define('categories',{
 // Relacionamento feito no Model Articles
 
 // Sincronizando Model com o banco de dados
-Category.sync({force: false});
 
 // Exportando Model
 module.exports = Category;

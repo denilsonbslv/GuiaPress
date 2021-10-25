@@ -1,0 +1,38 @@
+<%- include('../../partials/header.ejs') %> <!-- Importando o cabeçalho da página, HEADER -->
+<%- include('../../partials/navbar.ejs') %> <!-- Importando o navbar da página, NAVBAR -->
+<body>
+    <div class="container">
+        <hr>
+        <h2>Categorias</h2>
+        <a class="btn btn-primary" href="/admin/categories/new">Criar nova categoria</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach(category => { %> 
+                    <tr>
+                        <th><%= category.id %></th>
+                        <th><%= category.title %></th>
+                        <th><%= category.slug %></th>
+                        <th>
+                            <button class="btn btn-warning">Editar</button>
+
+                            <form action="/admin/categories/delete" method="post" style="display: inline;">
+                                <input type="hidden" name="id" value="<%= category.id %>">
+                                <button class="btn btn-danger">Deletar</button>
+                            </form>
+                        </th>
+                    </tr>
+                <% }) %> 
+            </tbody>
+        </table>
+    </div>
+</body>
+<%- include ('../../partials/footer.ejs') %>  <!-- Importando o footer da página, FOOTER -->
