@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-// Importando o modal Category
+// Importando o model Category
 const Category = require("./Category");
 
 // Carregando o Slugify
