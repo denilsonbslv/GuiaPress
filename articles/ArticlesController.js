@@ -9,7 +9,9 @@ const Article = require("../articles/Articles");
 const Category = require("../categories/Category");
 
 router.get("/admin/articles", (req, res) => {
-    res.send("Rota das artigos!");
+    Article.findAll().then(articles => {
+        res.render("admin/articles/index", {articles: articles});
+    });
 });
 
 router.get("/admin/articles/new", (req, res) => {

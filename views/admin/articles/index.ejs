@@ -1,0 +1,42 @@
+<%- include('../../partials/header.ejs') %> <!-- Importando o cabeçalho da página, HEADER -->
+<%- include('../../partials/navbar.ejs') %> <!-- Importando o navbar da página, NAVBAR -->
+<body>
+    <div class="container">
+        <hr>
+        <h2>Atigos</h2>
+        <a class="btn btn-primary" href="/admin/articles/new">Criar novo artigo</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach(article => { %>
+                    <tr>
+                        <td><%= article.id %></td>
+                        <td><%= article.title %></td>
+                        <td><%= article.slug %></td>
+                        <td><%= article.categoryId %></td>
+                        <td></td>
+                    </tr>
+                <% }) %> 
+            </tbody>
+        </table>
+    </div>
+</body>
+<%- include ('../../partials/footer.ejs') %>  <!-- Importando o footer da página, FOOTER -->
+<script>
+    function confirmDelete(event, form) {
+        event.preventDefault();
+        var decision = confirm("Deseja delelar a categoria?");
+        if (decision) {
+            form.submit();
+        }
+    }
+</script>
