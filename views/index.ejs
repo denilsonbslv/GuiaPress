@@ -1,6 +1,27 @@
 <%- include('./partials/header.ejs') %> <!-- Importando o cabeçalho da página, HEADER -->
 <body>
-    <%- include('./partials/navbar.ejs') %> <!-- Importando o navbar da página, NAVBAR -->
+    <%- include('./partials/homenavbar.ejs') %> <!-- Importando o navbar da página, NAVBAR -->
+
+    <div class="container">
+        <hr>
+        <div class="jumbotron">
+            <h1 class="display-4">Bem-Vindo!</h1>
+            <p class="lead">Este é um simples blog do Guia do Programador.</p>
+            <p>Isto é uma descrição detalhada.</p>
+        </div>
+        <hr>
+        <% articles.forEach(article => { %>
+            <div class="card">
+                <div class="card-header">
+                    <h2><%= article.title %></h2>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary" href="/<%= article.slug %> ">Ler Artigo</a>
+                </div>
+            </div>
+            <br>
+        <% }) %> 
+    </div>
     
 </body>
 <%- include ('./partials/footer.ejs') %>  <!-- Importando o footer da página, FOOTER -->

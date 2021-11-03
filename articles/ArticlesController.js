@@ -9,7 +9,9 @@ const Article = require("../articles/Articles");
 const Category = require("../categories/Category");
 
 router.get("/admin/articles", (req, res) => {
-    Article.findAll().then(articles => {
+    Article.findAll({
+        include: [{model: Category}]
+    }).then(articles => {
         res.render("admin/articles/index", {articles: articles});
     });
 });
@@ -33,5 +35,25 @@ router.post("/admin/articles/save", (req, res) => {
         res.redirect("/admin/articles/");
     });
 });
+
+router.post("/admin/articles/delete", (req, res) => {
+    var id = req.body.id;
+    if(id != undefined){
+        if (!isNaN(id)) {
+            Article.destroy({ // Apagando uma linha por meio de um ID
+                where: {
+                    id: id
+                }
+            }).then(() => {
+                res.redirect("/admin/articles");
+            });
+        }else{
+            res.redirect("/admin/articles");
+        }
+    }else{
+        res.redirect("/admin/articles");
+    }
+});
+
 // Exportando rotas
 module.exports = router;
