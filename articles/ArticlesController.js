@@ -55,5 +55,46 @@ router.post("/admin/articles/delete", (req, res) => {
     }
 });
 
+router.get("/admin/articles/edit/:id", (req, res) => {
+    var id = req.params.id;
+    console.log(id);
+
+    if (isNaN(id)) {
+        res.redirect("/admin/articles");
+    }
+
+    Article.findByPk(id).then(article => {
+        if (article != undefined) {
+            Category.findAll().then(categories => {
+                if (categories != undefined) {
+                    res.render("admin/articles/edit", {article: article, categories: categories});
+                }
+            });
+        }else{
+            res.redirect("/admin/articles");
+        }
+    }).catch(erro => {
+        res.redirect("/admin/articles");
+    });
+});
+
+router.post("/admin/article/update", (req, res) => {
+    var id = req.body.id;
+    var title = req.body.title;
+    var body = req.body.body;
+    var categoryId = req.body.category;
+
+    if (id != undefined && title != undefined && body != undefined && categoryId != undefined) {
+        Article.update(
+            {title: title, slug: slugify(title), body: body, categoryId: categoryId},
+            {where: {
+                id: id
+            }
+        }).then(() => {
+            res.redirect("/admin/articles");
+        });
+    }
+});
+
 // Exportando rotas
 module.exports = router;
