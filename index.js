@@ -2,6 +2,15 @@
 const express = require("express");
 const app = express();
 
+// Importando o Express Sessions
+const session = require("express-session");
+
+
+// Sessions
+app.use(session({
+    secret: "d9z1199N", cookie: { maxAge: 30000}
+}));
+
 // Especifica em qual porta a aplicação vai rodar
 const port = 80;
 
@@ -81,6 +90,8 @@ app.get("/category/:slug", (req, res) => {
         res.redirect("/");
     });
 });
+
+
 
 app.get("/", (req, res) => {
     Article.findAll({

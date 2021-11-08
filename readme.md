@@ -32,3 +32,8 @@ BCryptjs
 ```
 npm install --save bcryptjs
 ```
+
+Express Sessions
+```
+npm install --save express-session
+```

@@ -1,0 +1,25 @@
+<%- include('../../partials/header.ejs') %> <!-- Importando o cabeçalho da página, HEADER -->
+<%- include('../../partials/navbar.ejs') %> <!-- Importando o navbar da página, NAVBAR -->
+<body>
+    <div class="container">
+        <hr>
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2>Login de admin</h2>
+            </div>
+            <div class="card-body">
+                <form action="/authenticate" method="post">
+                    <label>E-mail: </label>
+                    <input class="form-control" type="email" name="email" placeholder="email@example.com">
+                    <br>
+                    <label>Senha: </label>
+                    <input class="form-control" type="password" name="password" placeholder="********">
+                    <br>
+                    <br>
+                    <button class="btn btn-primary col-12" type="submit">logar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include ('../../partials/footer.ejs') %>  <!-- Importando o footer da página, FOOTER -->
