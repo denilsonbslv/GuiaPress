@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 // Especifica em qual porta a aplicação vai rodar
-const port = 8080;
+const port = 80;
 
 // Carregando instancia do banco de dados
 const connection = require("./database/database");
@@ -11,10 +11,12 @@ const connection = require("./database/database");
 // Importando Controllers
 const categoriesController = require("./categories/CategoriesController");
 const articlesController = require("./articles/ArticlesController");
+const userController = require("./user/UserControtller");
 
 // Importando Models
 const Category = require("./categories/Category");
 const Article = require("./articles/Articles");
+const User = require("./user/User");
 
 // Conectando com o banco de dados
 connection
@@ -37,6 +39,7 @@ app.use(express.urlencoded({ extended: false}));
 // Rotas
 app.use("/", categoriesController);
 app.use("/", articlesController);
+app.use("/", userController);
 
 app.get("/:slug", (req, res) => {
     var slug = req.params.slug;
@@ -83,7 +86,8 @@ app.get("/", (req, res) => {
     Article.findAll({
         order: [
             ['id', 'DESC']
-        ]
+        ],
+        limit: 4
     }).then(articles => {
         Category.findAll().then(categories => {
             res.render("index", {articles: articles, categories: categories});

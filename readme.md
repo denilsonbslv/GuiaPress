@@ -27,3 +27,8 @@ Slugfy:
 ```
 npm install --save slugify
 ```
+
+BCryptjs
+```
+npm install --save bcryptjs
+```
