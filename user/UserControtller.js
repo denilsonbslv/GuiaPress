@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+// Carregando middleware
+const adminAuth = require("../midllewares/adminAuth");
+
 // Carregando o controller
 const User = require("./User");
 
@@ -8,13 +11,13 @@ const User = require("./User");
 const bcrypt = require("bcryptjs");
 
 // Rotas
-router.get("/admin/users", (req, res) => {
+router.get("/admin/users", adminAuth, (req, res) => {
     User.findAll().then(users => {
         res.render("admin/users/index", {users});
     });
 });
 
-router.get("/admin/users/create", (req, res) => {
+router.get("/admin/users/create", adminAuth, (req, res) => {
     res.render("admin/users/create");
 });
 
@@ -72,6 +75,11 @@ router.post("/authenticate", (req, res) => {
             res.redirect("/login");
         }
     });
+});
+
+router.get("/logout", (req, res) => {
+    req.session.user = undefined;
+    res.redirect("/");
 });
 
 // Exportando rotas

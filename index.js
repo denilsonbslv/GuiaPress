@@ -12,7 +12,7 @@ app.use(session({
 }));
 
 // Especifica em qual porta a aplicação vai rodar
-const port = 80;
+const port = 5000;
 
 // Carregando instancia do banco de dados
 const connection = require("./database/database");

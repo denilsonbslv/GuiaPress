@@ -1,2 +1,5 @@
 # Modulos do NodeJs
 node_modules
+
+# Arquivos VS Code
+.vscode

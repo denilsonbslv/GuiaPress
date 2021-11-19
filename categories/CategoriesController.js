@@ -2,6 +2,9 @@
 const express = require("express");
 const router = express.Router();
 
+// Carregando middleware
+const adminAuth = require("../midllewares/adminAuth");
+
 // Importando o model Category
 const Category = require("./Category");
 
@@ -9,11 +12,11 @@ const Category = require("./Category");
 const slugify = require("slugify");
 
 // Rotas
-router.get("/admin/categories/new", (req, res) => { // Rota para criar uma categoria
+router.get("/admin/categories/new", adminAuth, (req, res) => { // Rota para criar uma categoria
     res.render("admin/categories/new");
 });
 
-router.post("/categories/save", (req, res) => { //Rota para salvar uma categoria
+router.post("/categories/save", adminAuth, (req, res) => { //Rota para salvar uma categoria
     var title = req.body.title;
 
     if(title != undefined){
@@ -28,7 +31,7 @@ router.post("/categories/save", (req, res) => { //Rota para salvar uma categoria
     }
 });
 
-router.get("/admin/categories", (req, res) => { // Rota padrão da categoria
+router.get("/admin/categories",  adminAuth, (req, res) => { // Rota padrão da categoria
     Category.findAll({ raw: true, order:[
         ['id', 'ASC']
     ]}).then(categories => {
@@ -38,7 +41,7 @@ router.get("/admin/categories", (req, res) => { // Rota padrão da categoria
     });
 });
 
-router.post("/admin/categories/delete", (req, res) => {
+router.post("/admin/categories/delete", adminAuth, (req, res) => {
     var id = req.body.id;
     if(id != undefined){
         if (!isNaN(id)) {
@@ -57,7 +60,7 @@ router.post("/admin/categories/delete", (req, res) => {
     }
 });
 
-router.get("/admin/categories/edit/:id", (req, res) => {
+router.get("/admin/categories/edit/:id", adminAuth, (req, res) => {
     var id = req.params.id;
 
     if (isNaN(id)) {
@@ -77,7 +80,7 @@ router.get("/admin/categories/edit/:id", (req, res) => {
     });
 });
 
-router.post("/admin/categories/update", (req, res) => {
+router.post("/admin/categories/update", adminAuth, (req, res) => {
     var id = req.body.id;
     var title = req.body.title;
 
